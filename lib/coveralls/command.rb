@@ -11,7 +11,7 @@ module Coveralls
       ENV['COVERALLS_RUN_LOCALLY'] = 'true'
       cmds = ['bundle exec rake']
 
-      if File.exist?('.travis.yml')
+      if !ENV['IGNORE_TRAVIS_CFG'] && File.exist?('.travis.yml')
         cmds = begin
                  YAML.load_file('.travis.yml')['script'] || cmds
                rescue StandardError
